@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portfolio - Full Stack Developer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* ========== ESTILOS GENERALES ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #0369a1 100%);
+            min-height: 100vh;
+        }
+
+        /* ========== CONTENEDOR PRINCIPAL ========== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(14, 165, 233, 0.15);
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* ========== SECCIÓN DATOS PERSONALES ========== */
+        .header-section {
+            text-align: center;
+            padding: 50px 30px;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #0369a1 100%);
+            border-radius: 20px;
+            margin-bottom: 50px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-section > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 6px solid rgba(255, 255, 255, 0.9);
+            object-fit: cover;
+            margin-bottom: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 1);
+        }
+
+        .name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .profession {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .about-me {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        /* ========== ENLACES SOCIALES ========== */
+        .social-links {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 55px;
+            height: 55px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            font-size: 1.6rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-8px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ========== SECCIONES GENERALES ========== */
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 35px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            border-radius: 2px;
+            box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);
+        }
+
+        /* ========== TECNOLOGÍAS ========== */
+        .tech-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .tech-category {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(14, 165, 233, 0.1);
+        }
+
+        .tech-category:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15);
+            border-color: rgba(14, 165, 233, 0.2);
+        }
+
+        .tech-category-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tech-category-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tech-item {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(14, 165, 233, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+        }
+
+        /* ========== EXPERIENCIA LABORAL ========== */
+        .experience-item {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.08);
+            margin-bottom: 30px;
+            border-left: 5px solid #0ea5e9;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #0ea5e9, #0284c7, #0369a1);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15);
+            border-left-color: #0284c7;
+        }
+
+        .experience-item:hover::before {
+            opacity: 1;
+        }
+
+        .job-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .company {
+            font-size: 1.1rem;
+            color: #0ea5e9;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .period {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+            font-weight: 500;
+        }
+
+        .job-description {
+            color: #475569;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        /* ========== FORMACIÓN ========== */
+        .education-item {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.08);
+            margin-bottom: 25px;
+            border-left: 5px solid #0284c7;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .education-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #0284c7, #0369a1, #075985);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .education-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 35px rgba(14, 165, 233, 0.12);
+            border-left-color: #0369a1;
+        }
+
+        .education-item:hover::before {
+            opacity: 1;
+        }
+
+        .degree {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .institution {
+            font-size: 1.1rem;
+            color: #0284c7;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        /* ========== PROYECTOS ========== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(14, 165, 233, 0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(14, 165, 233, 0.2);
+            border-color: rgba(14, 165, 233, 0.2);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #0369a1 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .project-image i {
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        .project-description {
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(14, 165, 233, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-link {
+            color: #0ea5e9;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            padding: 8px 0;
+        }
+
+        .project-link:hover {
+            color: #0284c7;
+            transform: translateX(4px);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            .name {
+                font-size: 2rem;
+            }
+
+            .profession {
+                font-size: 1.1rem;
+            }
+
+            .about-me {
+                font-size: 1rem;
+            }
+
+            .social-links {
+                flex-wrap: wrap;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-categories {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ========== SECCIÓN DATOS PERSONALES ========== -->
+        <header class="header-section">
+            <!-- AQUÍ CAMBIAS LA URL DE CLOUDINARY POR LA DE TU FOTO -->
+            <img src="https://res.cloudinary.com/dchedntcz/image/upload/v1754994261/fotocv_x7f2lw.jpg" alt="Mi Foto" class="profile-photo">
+            
+            <!-- AQUÍ CAMBIAS TU NOMBRE -->
+            <h1 class="name">Miguel Angel Vera Gómez</h1>
+            
+            <!-- AQUÍ CAMBIAS TU PROFESIÓN -->
+            <p class="profession">Full Stack Developer</p>
+            
+            <!-- AQUÍ CAMBIAS TU DESCRIPCIÓN PERSONAL -->
+            <p class="about-me">
+               ¡De 21 años en un sector completamente diferente (con 2 ascensos bien merecidos) a conquistar el mundo del código! Desarrollador Full Stack especializado en React, Node.js y MongoDB,
+               con un enfoque fresco en el desarrollo web moderno. Dominio sólido de tecnologías frontend (HTML, CSS, Tailwind, JavaScript) y backend (Express, SQL). 
+               Bonus track: experiencia en impresión 3D con PrusaSlicer, UltiMaker Cura, ChiTuBox y Lychee, además de técnicas de escaneo 3D. 
+               Por si fuera poco, soy monitor de defensa personal certificado por FEDAMC y Ministerio del Interior, Campeón de España 2021 y 2023 en defensa personal, y medalla de bronce 2022. 
+               ¡Mismo enfoque estratégico, diferentes herramientas: siempre creando soluciones innovadoras y escalables!
+            </p>
+
+            <!-- ENLACES SOCIALES - CAMBIAR POR TUS URLS -->
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/miguel-angel-vera-gomez-63a776101/" class="social-link" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/MikeHapkidoIn" class="social-link" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="mangelveragomez@gmail.com" class="social-link" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </header>
+
+        <!-- ========== TECNOLOGÍAS ========== -->
+        <section class="section">
+            <h2 class="section-title">Tecnologías</h2>
+            
+            <div class="tech-categories">
+                <!-- FRONTEND -->
+                <div class="tech-category">
+                    <h3 class="tech-category-title">
+                        <div class="tech-category-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        Frontend
+                    </h3>
+                    <div class="tech-list">
+                        <span class="tech-item">HTML</span>
+                        <span class="tech-item">CSS</span>
+                        <span class="tech-item">JavaScript</span>
+                        <span class="tech-item">React</span>
+                        <span class="tech-item">Tailwind CSS</span>
+                        <span class="tech-item">React-Lucide</span>
+                    </div>
+                </div>
+
+                <!-- BACKEND -->
+                <div class="tech-category">
+                    <h3 class="tech-category-title">
+                        <div class="tech-category-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        Backend
+                    </h3>
+                    <div class="tech-list">
+                        <span class="tech-item">Node.js</span>
+                        <span class="tech-item">Express</span>
+                        <span class="tech-item">MongoDB</span>
+                        <span class="tech-item">SQL</span>
+                    </div>
+                </div>
+
+                <!-- HERRAMIENTAS -->
+                <div class="tech-category">
+                    <h3 class="tech-category-title">
+                        <div class="tech-category-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        Herramientas
+                    </h3>
+                    <div class="tech-list">
+                        <span class="tech-item">GitHub</span>
+                        <span class="tech-item">Visual Studio Code</span>
+                        <span class="tech-item">Trello</span>
+                        <span class="tech-item">Render</span>
+                        <span class="tech-item">Netlify</span>
+                    </div>
+                </div>
+
+                <!-- IMPRESIÓN 3D -->
+                <div class="tech-category">
+                    <h3 class="tech-category-title">
+                        <div class="tech-category-icon">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        Impresión 3D
+                    </h3>
+                    <div class="tech-list">
+                        <span class="tech-item">PrusaSlicer</span>
+                        <span class="tech-item">UltiMaker Cura</span>
+                        <span class="tech-item">ChiTuBox</span>
+                        <span class="tech-item">Lychee</span>
+                        <span class="tech-item">Escaneo 3D</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== EXPERIENCIA LABORAL ========== -->
+        <section class="section">
+            <h2 class="section-title">Experiencia Laboral</h2>
+            
+            <!-- EXPERIENCIA 1 - DUPLICAR ESTE BLOQUE PARA MÁS EXPERIENCIAS -->
+            <div class="experience-item">
+                <h3 class="job-title">Full Stack Developer</h3>
+                <p class="company">The Bridge </p>
+                <p class="period">Febrero 2025 - Agosto 2025</p>
+                <p class="job-description">
+                    Desarrollo de aplicaciones web completas utilizando React, Node.js, Express y MongoDB. 
+                    Implementación de interfaces responsivas con Tailwind CSS y JavaScript vanilla. 
+                    Gestión de proyectos con GitHub y Trello, deployment en Render y Netlify. 
+                    Desarrollo paralelo de prototipos 3D utilizando PrusaSlicer y técnicas de escaneo 3D.
+                </p>
+            </div>
+
+            <!-- EXPERIENCIA 2 -->
+            <div class="experience-item">
+                <h3 class="job-title">Full Stack Developer</h3>
+                <p class="company">Otra Empresa</p>
+                <p class="period">Junio 2020 - Diciembre 2021</p>
+                <p class="job-description">
+                    Desarrollo frontend con HTML, CSS y JavaScript, implementando diseños responsivos. 
+                    Trabajo con bases de datos SQL y integración de APIs REST. Uso de Visual Studio Code 
+                    como entorno principal de desarrollo. Experiencia adicional en modelado 3D y 
+                    post-procesado con UltiMaker Cura y ChiTuBox para proyectos de prototipado rápido.
+                </p>
+            </div>
+        </section>
+
+        <!-- ========== FORMACIÓN ========== -->
+        <section class="section">
+            <h2 class="section-title">Formación</h2>
+            
+            <!-- FORMACIÓN 1 - DUPLICAR PARA MÁS TÍTULOS -->
+            <div class="education-item">
+                <h3 class="degree">Grado en Ingeniería Informática</h3>
+                <p class="institution">Universidad / Centro de Estudios</p>
+                <p class="period">2018 - 2022</p>
+            </div>
+
+            <!-- FORMACIÓN 2 -->
+            <div class="education-item">
+                <h3 class="degree">Curso Full Stack Development</h3>
+                <p class="institution">Plataforma de Formación</p>
+                <p class="period">2023</p>
+            </div>
+        </section>
+
+        <!-- ========== PROYECTOS ========== -->
+        <section class="section">
+            <h2 class="section-title">Proyectos</h2>
+            
+            <div class="projects-grid">
+                <!-- PROYECTO 1 - DUPLICAR ESTE BLOQUE PARA MÁS PROYECTOS -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Aplicación Web Full Stack</h3>
+                        <p class="project-description">
+                            Aplicación web completa con frontend en React y backend con Node.js. 
+                            Incluye autenticación de usuarios, base de datos MongoDB y deployment en Render.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Express</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/tu-usuario/proyecto1" class="project-link" target="_blank">
+                                <i class="fab fa-github"></i> Código
+                            </a>
+                            <a href="https://proyecto1-demo.com" class="project-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROYECTO 2 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Landing Page Responsiva</h3>
+                        <p class="project-description">
+                            Página web moderna y responsiva desarrollada con HTML, CSS y Tailwind. 
+                            Optimizada para todos los dispositivos y deployada en Netlify.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">Tailwind</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Netlify</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/tu-usuario/proyecto2" class="project-link" target="_blank">
+                                <i class="fab fa-github"></i> Código
+                            </a>
+                            <a href="https://proyecto2-demo.com" class="project-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROYECTO 3 -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Sistema de Gestión de Datos</h3>
+                        <p class="project-description">
+                            Sistema completo para gestión de datos con interfaz React, iconos React-Lucide 
+                            y base de datos SQL. Incluye panel de administración y análisis de datos.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">SQL</span>
+                            <span class="tech-tag">React-Lucide</span>
+                            <span class="tech-tag">Render</span>
+                            <span class="tech-tag">GitHub</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/tu-usuario/proyecto3" class="project-link" target="_blank">
+                                <i class="fab fa-github"></i> Código
+                            </a>
+                            <a href="https://proyecto3-demo.com" class="project-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROYECTO 4 - IMPRESIÓN 3D -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Proyectos de Impresión 3D</h3>
+                        <p class="project-description">
+                            Desarrollo y optimización de modelos 3D para impresión. Experiencia en slicing, 
+                            post-procesado y escaneo 3D para proyectos personalizados y prototipos funcionales.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">PrusaSlicer</span>
+                            <span class="tech-tag">UltiMaker Cura</span>
+                            <span class="tech-tag">ChiTuBox</span>
+                            <span class="tech-tag">Lychee</span>
+                            <span class="tech-tag">Escaneo 3D</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/tu-usuario/proyectos-3d" class="project-link" target="_blank">
+                                <i class="fab fa-github"></i> Modelos
+                            </a>
+                            <a href="https://portfolio-3d.com" class="project-link" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Galería
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
