@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+< lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -492,7 +492,7 @@
         }
     </style>
 </head>
-<body>
+<>
     <div class="container">
         <!-- ========== SECCIÓN DATOS PERSONALES ========== -->
         <header class="header-section">
@@ -776,5 +776,57 @@
             </div>
         </section>
     </div>
+<!-- ========== MODAL DE CONTACTO ========== -->
+<div id="contact-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center;">
+  <div style="background:white; padding:30px; border-radius:20px; max-width:500px; width:90%; position:relative;">
+    <span id="close-modal" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:1.5rem;">&times;</span>
+    <h2>Contacta conmigo</h2>
+    <form id="contact-form">
+      <div style="margin-bottom:15px;">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="from_name" required style="width:100%; padding:10px; border-radius:10px; border:1px solid #ccc;">
+      </div>
+      <div style="margin-bottom:15px;">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="from_email" required style="width:100%; padding:10px; border-radius:10px; border:1px solid #ccc;">
+      </div>
+      <div style="margin-bottom:15px;">
+        <label for="message">Mensaje:</label>
+        <textarea id="message" name="message" required style="width:100%; padding:10px; border-radius:10px; border:1px solid #ccc;"></textarea>
+      </div>
+      <button type="submit" style="padding:10px 20px; border:none; border-radius:10px; background:#0284c7; color:white; cursor:pointer;">Enviar</button>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("MrSwHNwYVZQR96f_N"); // <- Aquí va tu Public Key de EmailJS
+  })();
+
+  const contactForm = document.getElementById('contact-form');
+  const contactModal = document.getElementById('contact-modal');
+  const closeModal = document.getElementById('close-modal');
+
+  // Abrir modal (puedes vincularlo a un botón)
+  function openModal() { contactModal.style.display = 'flex'; }
+  
+  // Cerrar modal
+  closeModal.addEventListener('click', () => { contactModal.style.display = 'none'; });
+
+  contactForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    emailjs.sendForm('service_k1zqwnz', 'template_wyrxbsh', this)
+      .then(() => {
+        alert('¡Mensaje enviado correctamente!');
+        contactForm.reset();
+        contactModal.style.display = 'none';
+      }, (err) => {
+        console.error('Error al enviar el email:', err);
+        alert('Ha ocurrido un error, inténtalo de nuevo.');
+      });
+  });
+</script>
 </body>
 </html>
